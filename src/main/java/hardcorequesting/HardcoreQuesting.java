@@ -17,6 +17,8 @@ import hardcorequesting.proxies.CommonProxy;
 import hardcorequesting.quests.Quest;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.DimensionManager;
 
 import java.io.File;
 
@@ -105,11 +107,21 @@ public class HardcoreQuesting {
 
     }
 
+    @EventHandler
+    public void serverStopping(FMLServerStoppingEvent event) {
+        WorldServer world = (WorldServer) DimensionManager.getWorld(0);
+        QuestingData.save(getWorldPath(world), world);
+    }
+
     public static EntityPlayer getPlayer() {
         return commandUser;
     }
 
     public static void setPlayer(EntityPlayer player) {
         commandUser = player;
+    }
+
+    private File getWorldPath(WorldServer world) {
+        return world.getChunkSaveLocation();
     }
 }

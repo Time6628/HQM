@@ -24,6 +24,7 @@ public class WorldEventListener {
         }
     }
 
+    /*
     @SubscribeEvent
     public void onSave(WorldEvent.Save event) {
         if (!event.world.isRemote && event.world.provider.dimensionId == 0) {
@@ -32,7 +33,7 @@ public class WorldEventListener {
             WorldServer world = (WorldServer) event.world;
             QuestingData.save(getWorldPath(world), world);
         }
-    }
+    }*/
 
     private File getWorldPath(WorldServer world) {
         return world.getChunkSaveLocation();
